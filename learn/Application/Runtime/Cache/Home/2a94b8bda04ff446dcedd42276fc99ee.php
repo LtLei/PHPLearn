@@ -5,7 +5,7 @@
     <head>
 
         <meta charset="utf-8">
-        <title>欢迎您学习PHP语言，PHP是世界上最友好的语言</title>
+        <title>欢迎您学习PHP语言</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -33,20 +33,12 @@
                 <button type="button" class="commit">Sign me in</button>
                 <div class="error"><span>+</span></div>
             </form>
-            <div class="connect">
-                <p>Or connect with:</p>
-                <p>
-                    <a class="facebook" href=""></a>
-                    <a class="twitter" href=""></a>
-                </p>
-            </div>
         </div>
 
         <!-- Javascript -->
         <script src="/Public/Home/js/jquery-1.8.2.min.js"></script>
         <script src="/Public/Home/js/supersized.3.2.7.min.js"></script>
         <script src="/Public/Home/js/supersized-init.js"></script>
-        <script src="/Public/Home/js/scripts.js"></script>
 
         <script>
             $('.commit').click(function(){
@@ -78,26 +70,17 @@
                     type: "POST",
                     url:$('#form').attr('action'),
                     data:$('#form').serialize(),// 序列化表单值
-                    async: false,
+                    async: true,
                     error: function(request) {
                         alert("Connection error");
                     },
                     success: function(data) {
-//                        var result = JSON.parse(data);
-                        console.log(data);
-                        console.log(data.code);
-
                         if(data.code==1){
-
-                            console.log(data.msg);
-                            alert(data.msg);
+                            alert(data.message);
 //                            window.location.href="跳转页面"
                         }else{
-
-                            console.log(data.msg);
-                            alert(data.msg);
+                            alert(data.message);
                         }
-//
                     }
                 });
             });
