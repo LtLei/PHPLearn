@@ -1,0 +1,16 @@
+create table if not exists user(
+    id int unsigned auto_increment,
+    user_name varchar(50) not null unique,
+    user_pass varchar(50) not null,
+    user_phone varchar(20) not null,
+    user_email varchar(50) not null,
+    user_sex tinyint unsigned not null default 0 comment '0 男 1 女',
+    create_time int unsigned not null default 0,
+    primary key (id)
+)engine=InnoDB default charset=utf8;
+
+insert into user (user_name,user_pass,user_phone,user_email,user_sex,create_time)
+    values      ('test1','123456','13122223333','test1@qq.com',0,0);
+
+insert into user (user_name,user_pass,user_phone,user_email,user_sex,create_time)
+    values      ('test2','654321','13133334444','test2@qq.com',1,0);
