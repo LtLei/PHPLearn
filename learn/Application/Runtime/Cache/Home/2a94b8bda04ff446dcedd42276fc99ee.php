@@ -31,6 +31,7 @@
                 <input type="text" name="username" class="username" placeholder="Username">
                 <input type="password" name="password" class="password" placeholder="Password">
                 <button type="button" class="commit">Sign me in</button>
+                <button type="button" class="register">Regist</button>
                 <div class="error"><span>+</span></div>
             </form>
         </div>
@@ -41,6 +42,10 @@
         <script src="/Public/Home/js/supersized-init.js"></script>
 
         <script>
+            $('.register').click(function () {
+               window.location.href="<?php echo U('Index/regist');?>";
+            });
+
             $('.commit').click(function(){
                 var user_name = $('.username').val();
                 var user_pass = $('.password').val();
@@ -77,7 +82,7 @@
                     success: function(data) {
                         if(data.code==1){
                             alert(data.message);
-//                            window.location.href="跳转页面"
+                            //                            window.location.href="跳转页面"
                         }else{
                             alert(data.message);
                         }

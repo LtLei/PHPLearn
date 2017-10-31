@@ -18,12 +18,23 @@ class UserModel extends Model
 		return $this->where($SQL, array($user_name, $user_pass))->select();
 	}
 
-	public function exists($user_name){
+	public function exists($user_name) {
 		$SQL = "user_name='%s'";
-		return $this->where($SQL,$user_name)->find();
+		return $this->where($SQL, $user_name)->find();
 	}
 
-	public function getUsers(){
+	public function getUsers() {
 		return $this->select();
+	}
+
+	public function regist($user_name, $user_pass, $user_phone, $user_email, $user_sex) {
+		$data["user_name"] = $user_name;
+		$data["user_pass"] = $user_pass;
+		$data["user_phone"] = $user_phone;
+		$data["user_email"] = $user_email;
+		$data["user_sex"] = $user_sex;
+		$data["create_time"] = time();
+
+		return $this->add($data);
 	}
 }
