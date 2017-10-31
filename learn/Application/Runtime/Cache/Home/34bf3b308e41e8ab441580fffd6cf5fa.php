@@ -44,7 +44,6 @@
         <script src="/Public/Home/js/supersized-init.js"></script>
 
         <script>
-
             $('.username').blur(function () {
                 if ($('.username').val()==''){return;}
                 $.ajax({
@@ -144,7 +143,7 @@
                     success: function(data) {
                         if(data.code==1){
                             alert(data.message);
-                            history.replaceState(null,null,":U{'Index/index'}");
+                            window.location.href = "<?php echo U('Index/home');?>";
                         }else{
                             alert(data.message);
                         }

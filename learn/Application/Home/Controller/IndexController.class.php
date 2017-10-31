@@ -7,7 +7,12 @@ use Think\Controller;
 class IndexController extends Controller
 {
 	public function index() {
-		$this->display();
+		$name = session('username');
+		if (empty($name)) {
+			$this->display();
+		} else {
+			$this->redirect('home');
+		}
 	}
 
 	public function users() {
@@ -20,9 +25,23 @@ class IndexController extends Controller
 		var_dump($res);
 	}
 
+	public function home() {
+		$username = session('username');
+		if (empty($username)) {
+			$this->redirect('index');
+		} else {
+			$this->display();
+		}
+	}
+
 	public function regist() {
 		if (!$_POST) {
-			$this->display();
+			$name = session('username');
+			if (empty($name)) {
+				$this->display();
+			} else {
+				$this->redirect('home');
+			}
 		} else {
 			header('Content-Type:application/json; charset=utf-8');
 			//数据校验
@@ -90,6 +109,8 @@ class IndexController extends Controller
 				$return['message'] = '注册失败，请稍后再试';
 				exit(json_encode($return));
 			}
+
+			session('username',$user_name);
 
 			$return['code'] = 1;
 			$return['message'] = '注册成功';
@@ -162,8 +183,11 @@ class IndexController extends Controller
 			exit(json_encode($return));
 		}
 
+		session('username', $user_name);
+
 		$return['code'] = 1;
 		$return['message'] = '登录成功';
 		echo json_encode($return);
+
 	}
 }
