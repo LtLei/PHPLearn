@@ -6,5 +6,24 @@
 </head>
 <body>
 这里就进入首页了
+<script src="__PUBLIC__/Home/js/jquery-1.8.2.min.js"></script>
+<script>
+    $.ajax({
+        type: "GET",
+        url: "{:U('Index/articles')}",
+        data: '',
+        async: true,
+        error: function (request) {
+            alert("Connection error");
+        },
+        success: function (data) {
+            if (data.code == 1) {
+                alert(data.message);
+            } else {
+                alert(data.message);
+            }
+        }
+    });
+</script>
 </body>
 </html>

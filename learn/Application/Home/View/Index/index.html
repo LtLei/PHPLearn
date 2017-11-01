@@ -41,6 +41,25 @@
 <script src="__PUBLIC__/Home/js/supersized-init.js"></script>
 
 <script>
+    $.ajax({
+        type: "GET",
+        url: "{:U('Index/check')}",
+        data: '',
+        async: true,
+        error: function (request) {
+            alert("Connection error");
+        },
+        success: function (data) {
+            if (data.code == 1) {
+                console.log(data.message);
+                window.location.href = "{:U('Index/home')}";
+            } else {
+                console.log(data.message);
+//                alert(data.message);
+            }
+        }
+    });
+
     $('.register').click(function () {
         window.location.href = "{:U('Index/regist')}";
     });

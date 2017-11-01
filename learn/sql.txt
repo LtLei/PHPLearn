@@ -14,3 +14,33 @@ insert into user (user_name,user_pass,user_phone,user_email,user_sex,create_time
 
 insert into user (user_name,user_pass,user_phone,user_email,user_sex,create_time)
     values      ('test2','654321','13133334444','test2@qq.com',1,0);
+
+create table if not exists article(
+    id int unsigned auto_increment,
+    title varchar(50) not null,
+    descript text not null,
+    content text not null,
+    image_path varchar(100) not null,
+    author_id int unsigned not null,
+    create_time int unsigned not null default 0,
+    primary key (id)
+)engine=InnoDB default charset=utf8;
+
+insert into article (title,descript,content,image_path,author_id,create_time)
+    values          ('重磅消息1','Python超过Java了1','Python超过Java了,在Github上排名第二，Java屈居第三。1','/upload/home/image/article1.jpg',1,0);
+
+insert into article (title,descript,content,image_path,author_id,create_time)
+    values          ('重磅消息2','Python超过Java了2','Python超过Java了,在Github上排名第二，Java屈居第三。2','/upload/home/image/article2.jpg',2,0);
+
+insert into article (title,descript,content,image_path,author_id,create_time)
+    values          ('重磅消息3','Python超过Java了3','Python超过Java了,在Github上排名第二，Java屈居第三。3','/upload/home/image/article3.jpg',1,0);
+
+insert into article (title,descript,content,image_path,author_id,create_time)
+    values          ('重磅消息4','Python超过Java了4','Python超过Java了,在Github上排名第二，Java屈居第三。4','/upload/home/image/article4.jpg',2,0);
+
+insert into article (title,descript,content,image_path,author_id,create_time)
+    values          ('重磅消息5','Python超过Java了5','Python超过Java了,在Github上排名第二，Java屈居第三。5','/upload/home/image/article5.jpg',1,0);
+
+select article.title,article.descript,article.content,article.image_path,user.user_name from article inner join user on article.author_id=user.id;
+
+select a.title title,a.descript descript,a.content content,a.image_path image_path,u.user_name user_name from article a inner join user u on a.author_id=u.id;

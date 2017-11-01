@@ -7,12 +7,7 @@ use Think\Controller;
 class IndexController extends Controller
 {
 	public function index() {
-		$name = session('username');
-		if (empty($name)) {
-			$this->display();
-		} else {
-			$this->redirect('home');
-		}
+		$this->display();
 	}
 
 	public function users() {
@@ -25,10 +20,20 @@ class IndexController extends Controller
 		var_dump($res);
 	}
 
+	public function articles() {
+		$Article = M('Article');
+		$res = $Article
+			->alias('a')
+			->field('a.title title,a.descript descript,a.content content,a.image_path image_path,u.user_name user_name')
+			->join('user u on a.author_id=u.id')
+			->select();
+		var_dump($res);
+	}
+
 	public function home() {
 		$username = session('username');
 		if (empty($username)) {
-			$this->redirect('index');
+			$this->redirect('Index/index');
 		} else {
 			$this->display();
 		}
@@ -110,7 +115,7 @@ class IndexController extends Controller
 				exit(json_encode($return));
 			}
 
-			session('username',$user_name);
+			session('username', $user_name);
 
 			$return['code'] = 1;
 			$return['message'] = '注册成功';
@@ -188,6 +193,19 @@ class IndexController extends Controller
 		$return['code'] = 1;
 		$return['message'] = '登录成功';
 		echo json_encode($return);
+	}
 
+	public function check() {
+		header('Content-Type:application/json; charset=utf-8');
+		$username = session('username');
+		if (empty($username)) {
+			$return['code'] = 0;
+			$return['message'] = '尚未登录';
+			echo json_encode($return);
+		} else {
+			$return['code'] = 1;
+			$return['message'] = '已经登录';
+			echo json_encode($return);
+		}
 	}
 }
