@@ -44,3 +44,7 @@ insert into article (title,descript,content,image_path,author_id,create_time)
 select article.title,article.descript,article.content,article.image_path,user.user_name from article inner join user on article.author_id=user.id;
 
 select a.title title,a.descript descript,a.content content,a.image_path image_path,u.user_name user_name from article a inner join user u on a.author_id=u.id;
+
+select a.title title,a.descript descript,a.content content,a.image_path image_path,u.user_name user_name from article a inner join user u on a.author_id=u.id;
+
+select a.title title,a.descript descript,a.content content,a.image_path image_path,u.user_name user_name from article a, user u where a.author_id=u.id;

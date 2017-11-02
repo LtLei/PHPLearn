@@ -21,13 +21,17 @@ class IndexController extends Controller
 	}
 
 	public function articles() {
+		header('Content-Type:application/json; charset=utf-8');
 		$Article = M('Article');
 		$res = $Article
 			->alias('a')
 			->field('a.title title,a.descript descript,a.content content,a.image_path image_path,u.user_name user_name')
 			->join('user u on a.author_id=u.id')
 			->select();
-		var_dump($res);
+		$return['code'] = 1;
+		$return['message'] = '获取成功';
+		$return['data'] = $res;
+		echo json_encode($return);
 	}
 
 	public function home() {
@@ -35,6 +39,13 @@ class IndexController extends Controller
 		if (empty($username)) {
 			$this->redirect('Index/index');
 		} else {
+			$Article = M('Article');
+			$res = $Article
+				->alias('a')
+				->field('a.title title,a.descript descript,a.content content,a.image_path image_path,u.user_name user_name')
+				->join('user u on a.author_id=u.id')
+				->select();
+			$this->assign('articles', $res);
 			$this->display();
 		}
 	}
